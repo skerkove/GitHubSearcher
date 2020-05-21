@@ -7,13 +7,25 @@
 //
 
 import Foundation
+import UIKit
 
 class ViewModel {
-    
 
+    
+    var userSearchArray = [UserModel]()
     var error : Error?
     
+    func searchFor(username: String, completion: @escaping completion) {
+        let newUrl = "https://api.github.com/search/users?q=\(username)"
+        ApiHandler.getDataFromServer(filteredUrl:newUrl) { (model) in
+            self.userSearchArray = model
+            completion(model)
+            
+        }
+    }
     
+
+
 //    func getNumberOfRows(forArray: [User])->Int {
 //      return forArray.count
 //    }
